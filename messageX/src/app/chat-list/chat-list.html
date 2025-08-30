@@ -1,1 +1,12 @@
-<button (click)="callbutton()">hello</button>
+<div class="w-80 bg-gray-50 h-screen overflow-y-auto shadow-lg">
+  <div *ngFor="let chat of chats" 
+       class="flex items-center p-4 hover:bg-gray-200 cursor-pointer rounded-lg"
+       (click)="selectChat(chat)">
+    <!-- Avatar -->
+    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+      <img [src]="chat.avatar" alt="{{chat.username}}" class="w-full h-full object-cover"/>
+    </div>
+    <!-- Username -->
+    <div class="text-gray-800 font-semibold">{{ chat.username }}</div>
+  </div>
+</div>

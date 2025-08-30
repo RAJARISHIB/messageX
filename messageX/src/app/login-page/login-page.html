@@ -1,20 +1,24 @@
-<div class="min-h-screen flex items-center justify-center bg-base-200">
-  <div class="card w-96 bg-base-100 shadow-2xl">
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+  <div class="card w-96 bg-white/10 backdrop-blur-xl shadow-2xl border border-gray-700 rounded-2xl p-6">
     <div class="card-body">
       <!-- Tabs -->
-      <div role="tablist" class="tabs tabs-boxed mb-4">
+      <div role="tablist" class="flex mb-6 rounded-xl overflow-hidden">
         <a
           role="tab"
-          class="tab"
-          [class.tab-active]="activeTab === 'login'"
+          class="flex-1 text-center py-2 cursor-pointer font-semibold text-gray-300 bg-gray-800 hover:bg-gray-700 transition"
+          [class.bg-gradient-to-r]="activeTab === 'login'"
+          [class.from-gray-600]="activeTab === 'login'"
+          [class.to-gray-400]="activeTab === 'login'"
           (click)="activeTab = 'login'"
         >
           Login
         </a>
         <a
           role="tab"
-          class="tab"
-          [class.tab-active]="activeTab === 'register'"
+          class="flex-1 text-center py-2 cursor-pointer font-semibold text-gray-300 bg-gray-800 hover:bg-gray-700 transition"
+          [class.bg-gradient-to-r]="activeTab === 'register'"
+          [class.from-gray-600]="activeTab === 'register'"
+          [class.to-gray-400]="activeTab === 'register'"
           (click)="activeTab = 'register'"
         >
           Create User
@@ -24,61 +28,57 @@
       <!-- Login Form -->
       <form *ngIf="activeTab === 'login'" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
         <!-- Username -->
-        <div class="form-control">
+        <div class="form-control mb-4">
           <label class="label">
-            <span class="label-text">Username</span>
+            <span class="text-gray-200">Username</span>
           </label>
           <input 
             name="username"
             type="text"
-            placeholder="Enter Username" 
-            class="input input-bordered" 
+            placeholder="Enter Username"
+            class="w-full px-3 py-2 rounded-lg bg-gray-900/60 border border-gray-600 text-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none"
             required
             ngModel
           />
         </div>
 
         <!-- Password -->
-        <div class="form-control mt-4">
+        <div class="form-control mb-6">
           <label class="label">
-            <span class="label-text">Password</span>
+            <span class="text-gray-200">Password</span>
           </label>
           <input
             name="password"
             type="password"
             placeholder="Enter password"
-            class="input input-bordered"
+            class="w-full px-3 py-2 rounded-lg bg-gray-900/60 border border-gray-600 text-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none"
             required
             ngModel
           />
-          <label class="label">
-            <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+          <label class="label mt-1">
+            <a href="#" class="text-sm text-gray-400 hover:text-gray-200">Forgot password?</a>
           </label>
         </div>
 
         <!-- Submit -->
-        <div class="form-control mt-6">
-          <button 
-            type="submit" 
-            class="btn btn-primary">
-              Login
-          </button>
-        </div>
+        <button 
+          type="submit" 
+          class="w-full py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-gray-500 to-gray-300 hover:from-gray-400 hover:to-white border border-gray-600 shadow-lg transition">
+          Login
+        </button>
       </form>
 
-
-    
       <!-- Register Form -->
       <form *ngIf="activeTab === 'register'" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
         <!-- Username -->
-        <div class="form-control">
+        <div class="form-control mb-4">
           <label class="label">
-            <span class="label-text">Username</span>
+            <span class="text-gray-200">Username</span>
           </label>
           <input 
             type="text" 
-            placeholder="Enter username" 
-            class="input input-bordered" 
+            placeholder="Enter username"
+            class="w-full px-3 py-2 rounded-lg bg-gray-900/60 border border-gray-600 text-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none"
             required
             name="username"
             ngModel
@@ -86,14 +86,14 @@
         </div>
 
         <!-- Password -->
-        <div class="form-control mt-4">
+        <div class="form-control mb-4">
           <label class="label">
-            <span class="label-text">Password</span>
+            <span class="text-gray-200">Password</span>
           </label>
           <input
             type="password"
             placeholder="Enter password"
-            class="input input-bordered"
+            class="w-full px-3 py-2 rounded-lg bg-gray-900/60 border border-gray-600 text-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none"
             required
             name="password"
             ngModel
@@ -101,14 +101,14 @@
         </div>
 
         <!-- Confirm Password -->
-        <div class="form-control mt-4">
+        <div class="form-control mb-6">
           <label class="label">
-            <span class="label-text">Confirm Password</span>
+            <span class="text-gray-200">Confirm Password</span>
           </label>
           <input
             type="password"
             placeholder="Confirm password"
-            class="input input-bordered"
+            class="w-full px-3 py-2 rounded-lg bg-gray-900/60 border border-gray-600 text-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none"
             required
             name="confirmPassword"
             ngModel
@@ -116,9 +116,11 @@
         </div>
 
         <!-- Submit -->
-        <div class="form-control mt-6">
-          <button type="submit" class="btn btn-success">Create Account</button>
-        </div>
+        <button 
+          type="submit" 
+          class="w-full py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-gray-500 to-gray-300 hover:from-gray-400 hover:to-white border border-gray-600 shadow-lg transition">
+          Create Account
+        </button>
       </form>
     </div>
   </div>
