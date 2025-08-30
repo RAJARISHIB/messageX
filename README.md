@@ -1,4 +1,4 @@
-# API/ui Setup with PostgreSQL & Node.js
+# API/UI Setup with PostgreSQL & Node.js
 
 This project uses **Node.js v20.19.4** and **PostgreSQL** as the database.  
 Follow the steps below to set up your personal PostgreSQL server and configure the API.
