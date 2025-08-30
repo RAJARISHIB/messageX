@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+
+# Node / Angular
+node_modules/
+.angular/
+dist/
+build/
+
+# Editor & system
+.vscode/
+.idea/
+.DS_Store
+*.log

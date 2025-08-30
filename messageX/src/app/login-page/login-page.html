@@ -1,0 +1,125 @@
+<div class="min-h-screen flex items-center justify-center bg-base-200">
+  <div class="card w-96 bg-base-100 shadow-2xl">
+    <div class="card-body">
+      <!-- Tabs -->
+      <div role="tablist" class="tabs tabs-boxed mb-4">
+        <a
+          role="tab"
+          class="tab"
+          [class.tab-active]="activeTab === 'login'"
+          (click)="activeTab = 'login'"
+        >
+          Login
+        </a>
+        <a
+          role="tab"
+          class="tab"
+          [class.tab-active]="activeTab === 'register'"
+          (click)="activeTab = 'register'"
+        >
+          Create User
+        </a>
+      </div>
+
+      <!-- Login Form -->
+      <form *ngIf="activeTab === 'login'" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <!-- Username -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Username</span>
+          </label>
+          <input 
+            name="username"
+            type="text"
+            placeholder="Enter Username" 
+            class="input input-bordered" 
+            required
+            ngModel
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="form-control mt-4">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            class="input input-bordered"
+            required
+            ngModel
+          />
+          <label class="label">
+            <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-control mt-6">
+          <button 
+            type="submit" 
+            class="btn btn-primary">
+              Login
+          </button>
+        </div>
+      </form>
+
+
+    
+      <!-- Register Form -->
+      <form *ngIf="activeTab === 'register'" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <!-- Username -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Username</span>
+          </label>
+          <input 
+            type="text" 
+            placeholder="Enter username" 
+            class="input input-bordered" 
+            required
+            name="username"
+            ngModel
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="form-control mt-4">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            class="input input-bordered"
+            required
+            name="password"
+            ngModel
+          />
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-control mt-4">
+          <label class="label">
+            <span class="label-text">Confirm Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="Confirm password"
+            class="input input-bordered"
+            required
+            name="confirmPassword"
+            ngModel
+          />
+        </div>
+
+        <!-- Submit -->
+        <div class="form-control mt-6">
+          <button type="submit" class="btn btn-success">Create Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
