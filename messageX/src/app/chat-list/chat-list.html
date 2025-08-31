@@ -1,12 +1,27 @@
-<div class="w-80 bg-gray-50 h-screen overflow-y-auto shadow-lg">
-  <div *ngFor="let chat of chats" 
-       class="flex items-center p-4 hover:bg-gray-200 cursor-pointer rounded-lg"
-       (click)="selectChat(chat)">
-    <!-- Avatar -->
-    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-      <img [src]="chat.avatar" alt="{{chat.username}}" class="w-full h-full object-cover"/>
+<div class="w-80 bg-base-200 h-screen shadow-lg flex flex-col">
+  <!-- Search Bar -->
+  <div class="p-4">
+    <label class="input input-bordered flex items-center gap-2 rounded-xl shadow-sm">
+      <input 
+        type="text" 
+        placeholder="Search chats..." 
+        class="grow bg-transparent focus:outline-none"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearch($event)"/>
+    </label>
+  </div>
+
+  <!-- Chat List -->
+  <div class="flex-1 overflow-y-auto px-2 pb-4">
+    <div *ngFor="let chat of chats" 
+         class="flex items-center p-3 mb-2 bg-base-100 hover:bg-base-300 cursor-pointer rounded-2xl shadow-sm transition-all duration-200"
+         (click)="selectChat(chat)">
+      
+      <!-- <div class="w-12 h-12 rounded-full overflow-hidden mr-4 shadow">
+        <img [src]="chat.avatar" alt="{{chat.username}}" class="w-full h-full object-cover"/>
+      </div> -->
+      
+      <div class="text-base font-semibold text-white-800">{{ chat?.username }}</div>
     </div>
-    <!-- Username -->
-    <div class="text-gray-800 font-semibold">{{ chat.username }}</div>
   </div>
 </div>

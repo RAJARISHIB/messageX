@@ -17,7 +17,7 @@ export class Common {
     });
   }
 
-  doLogin(payload: any) {
+  doLogin(payload: any) { 
     this.http.post(`${this.apiUrl}/user/do_login/`, payload).subscribe((response: any) => {
       if (response) {
         sessionStorage.setItem('JWT_token', response?.access);
@@ -33,5 +33,9 @@ export class Common {
   }
   checkAuth(): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/check_auth/`);
+  }
+
+  filterUsers(payload: any) {
+    return this.http.get(`${this.apiUrl}/chat/filterUsers/`, payload)
   }
 }
