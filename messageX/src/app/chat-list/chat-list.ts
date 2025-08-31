@@ -39,7 +39,6 @@ export class ChatList implements OnInit, OnDestroy {
       { id: 8, username: 'Heidi', avatar: 'https://i.pravatar.cc/150?img=8' },
     ];
   }
-  
 
   ngOnDestroy() {
     if (this.subscription) {
