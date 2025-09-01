@@ -38,4 +38,8 @@ export class Common {
   filterUsers(payload: any) {
     return this.http.get(`${this.apiUrl}/chat/filterUsers/`, payload)
   }
+
+  sendMessage(payload: any) {
+    return this.http.get(`${this.apiUrl}/chat/sendMessage/`, payload)
+  }
 }
