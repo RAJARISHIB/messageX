@@ -12,32 +12,22 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class ChatList implements OnInit, OnDestroy {
   searchTerm: string = '';
   chats: any[] = [];
+  selectedChat: any = null;
+  messages: { from: string; message: string }[] = [];
+  messageText: string = '';
+  
   private searchSubject = new Subject<string>();
   private subscription!: Subscription;
 
   constructor(private _commonService: Common) {}
 
   ngOnInit() {
-    // Debounce search input
     this.subscription = this.searchSubject
-      .pipe(
-        debounceTime(400),
-        distinctUntilChanged()
-      )
+      .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((term) => {
         this.fetchUsers(term);
       });
-
-    this.chats = [
-      { id: 1, username: 'Alice', avatar: 'https://i.pravatar.cc/150?img=1' },
-      { id: 2, username: 'Bob', avatar: 'https://i.pravatar.cc/150?img=2' },
-      { id: 3, username: 'Charlie', avatar: 'https://i.pravatar.cc/150?img=3' },
-      { id: 4, username: 'David', avatar: 'https://i.pravatar.cc/150?img=4' },
-      { id: 5, username: 'Eve', avatar: 'https://i.pravatar.cc/150?img=5' },
-      { id: 6, username: 'Frank', avatar: 'https://i.pravatar.cc/150?img=6' },
-      { id: 7, username: 'Grace', avatar: 'https://i.pravatar.cc/150?img=7' },
-      { id: 8, username: 'Heidi', avatar: 'https://i.pravatar.cc/150?img=8' },
-    ];
+    this.fetchUsers('');
   }
 
   ngOnDestroy() {
@@ -51,20 +41,42 @@ export class ChatList implements OnInit, OnDestroy {
   }
 
   fetchUsers(term: string) {
-    const payload = {params: { searchTerm: term }}
+    const payload = { params: { searchTerm: term } };
     this._commonService.filterUsers(payload).subscribe((response: any) => {
       if (response) {
-        this.chats = response?.data
+        this.chats = response?.data;
       }
     });
-    
+  }
+
+  selectChat(chat: any) {
+    this.selectedChat = chat;
+    this.loadMessages(chat);
+  }
+
+  loadMessages(chat: any) {
+    // Replace this with an API call if needed
+    this.messages = [
+      { from: chat.username, message: 'Hello!' },
+      { from: 'You', message: 'Hi there!' },
+    ];
+  }
+
+  sendMessage() {
+    console.log('sendMessage', this.selectedChat)
+    if (!this.messageText.trim()) return;
+
+    this.messages.push({
+      from: 'You',
+      message: this.messageText,
+    });
+
+    this.messageText = '';
+    // Optionally send message to server
+    // this._commonService.sendMessage(this.selectedChat.id, this.messageText).subscribe(...)
   }
 
   callbutton() {
     this._commonService.tempCall();
-  }
-
-  selectChat(chat: any) {
-    // console.log('SelectChatCalled', chat);
   }
 }

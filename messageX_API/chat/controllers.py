@@ -18,7 +18,10 @@ class ChatControllers:
                 users = User.objects.filter(username__icontains=searchTerm, is_active=True)
                 results = [{"id": user.id, "username": user.username} for user in users]
                 return Response({"message": 'succesful', 'data': results}, status=200)
-            return Response({'message': 'success'}, status=200)
+            else:
+                users = User.objects.filter(is_active=True)
+                results = [{'id': user.id, 'username': user.username} for user in users]
+                return Response({'message': 'success', 'data': results}, status=200)
         except Exception as err:
             print('Exception in function ChatController', err, type(err))
             return Response({'message': 'failed'}, status=500)
