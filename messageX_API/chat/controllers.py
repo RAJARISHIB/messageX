@@ -19,7 +19,6 @@ class ChatControllers:
                 results = [{"id": user.id, "username": user.username} for user in users]
                 return Response({"message": 'succesful', 'data': results}, status=200)
             else:
-                print('else conditions')
                 users = User.objects.filter(is_active=True)
                 results = [{'id': user.id, 'username': user.username} for user in users]
                 return Response({'message': 'success', 'data': results}, status=200)
