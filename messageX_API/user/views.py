@@ -7,21 +7,16 @@ from rest_framework.response import Response
 
 class UserViewSet(ModelViewSet, UserControllers):
 
-    def get_permissions(self):
-        if self.action in ['check_auth']:
-            return [IsAuthenticated()]
-        return [AllowAny()]
-    
-    @action(detail=False, methods=['post'], url_path='create_user')
+    @action(detail=False, methods=['post'], url_path='create_user', permission_classes=[AllowAny])
     def create_user(self, request):
         ret = self.create_new_user(request)
         return ret
-    
-    @action(detail=False, methods=['post'], url_path='do_login')
+
+    @action(detail=False, methods=['post'], url_path='do_login', permission_classes=[AllowAny])
     def doLogin(self, request):
         ret = self.do_login(request)
         return ret
-    
-    @action(detail=False, methods=['get'], url_path='check_auth')
+
+    @action(detail=False, methods=['get'], url_path='check_auth', permission_classes=[IsAuthenticated])
     def check_auth(self, request):
-        return Response({'message': 'Auth Succesful'}, status=200)
+        return Response({'message': 'Auth Successful'}, status=200)

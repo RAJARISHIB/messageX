@@ -11,7 +11,7 @@ class ChatControllers:
     
     def filter_users(self, request):
         try:
-            print('Enter into function filter_users on ChatController')
+            print('Enter into function filter_users on ChatControllers')
             data = request.query_params
             searchTerm = data.get('searchTerm')
             if searchTerm not in Nonelist:
@@ -23,5 +23,5 @@ class ChatControllers:
                 results = [{'id': user.id, 'username': user.username} for user in users]
                 return Response({'message': 'success', 'data': results}, status=200)
         except Exception as err:
-            print('Exception in function ChatController', err, type(err))
+            print('Exception in function filter_users on ChatControllers', err, type(err))
             return Response({'message': 'failed'}, status=500)

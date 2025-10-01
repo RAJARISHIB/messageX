@@ -13,7 +13,7 @@ export class ChatList implements OnInit, OnDestroy {
   searchTerm: string = '';
   chats: any[] = [];
   selectedChat: any = null;
-  messages: { from: string; message: string }[] = [];
+  messages: any;
   messageText: string = '';
   
   private searchSubject = new Subject<string>();
@@ -67,10 +67,15 @@ export class ChatList implements OnInit, OnDestroy {
     if (!this.messageText.trim()) return;
 
     this.messages.push({
-      from: 'You',
       message: this.messageText,
     });
 
+    const payload = {
+      'message': this.messageText
+    }
+    this._commonService.sendMessage(payload).subscribe(()=> {
+      console.log('nigga subscribed')
+    })
     this.messageText = '';
     // Optionally send message to server
     // this._commonService.sendMessage(this.selectedChat.id, this.messageText).subscribe(...)
