@@ -17,7 +17,7 @@ export class Common {
     });
   }
 
-  doLogin(payload: any) { 
+  doLogin(payload: any) {
     this.http.post(`${this.apiUrl}/user/do_login/`, payload).subscribe((response: any) => {
       if (response) {
         sessionStorage.setItem('JWT_token', response?.access);
@@ -31,15 +31,20 @@ export class Common {
       console.log('hello');
     });
   }
+
   checkAuth(): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/check_auth/`);
   }
 
   filterUsers(payload: any) {
-    return this.http.get(`${this.apiUrl}/chat/filterUsers/`, payload)
+    return this.http.get(`${this.apiUrl}/chat/filterUsers/`, payload);
   }
 
   sendMessage(payload: any) {
-    return this.http.post(`${this.apiUrl}/chat/sendMessage/`, payload)
+    return this.http.post(`${this.apiUrl}/chat/sendMessage/`, payload);
+  }
+
+  getMessage(payload: any) {
+    return this.http.post(`${this.apiUrl}/chat/getMessage/`, payload);
   }
 }
