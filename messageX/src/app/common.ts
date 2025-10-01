@@ -47,4 +47,8 @@ export class Common {
   getMessage(payload: any) {
     return this.http.post(`${this.apiUrl}/chat/getMessage/`, payload);
   }
+
+  getCurrentUserDetails() {
+    return this.http.get(`${this.apiUrl}/user/get-current-user-detail/`)
+  }
 }

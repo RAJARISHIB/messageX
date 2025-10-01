@@ -18,10 +18,14 @@ export class ChatList implements OnInit, OnDestroy {
   
   private searchSubject = new Subject<string>();
   private subscription!: Subscription;
+  currentUserID: any;
 
   constructor(private _commonService: Common) {}
 
   ngOnInit() {
+    this._commonService.getCurrentUserDetails().subscribe((response: any) => {
+      this.currentUserID = response?.id;
+    });
     this.subscription = this.searchSubject
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((term) => {
@@ -55,34 +59,35 @@ export class ChatList implements OnInit, OnDestroy {
   }
 
   loadMessages(chat: any) {
-    this.messages = [
-      { from: chat.id, message: 'Hello!' },
-      { from: 'You', message: 'Hi there!' },
-    ];
-    let payload = {
-      'receiver': this.selectedChat
-    }
-    this._commonService.getMessage(payload).subscribe((response) => {
-      console.log('response =======>', response)
-    })
+    const payload = { receiver: this.selectedChat };
+
+    this._commonService.getMessage(payload).subscribe((response: any) => {
+      if (response && response.messages) {
+        this.messages = response.messages.map((msg: any) => ({
+          from: msg.sender_id === this.currentUserID ? 'You' : this.selectedChat.username,
+          message: msg.content,
+          created_at: msg.created_at,
+        }));
+      }
+    });
   }
 
   sendMessage() {
-    console.log('sendMessage', this.selectedChat)
+    console.log('sendMessage', this.selectedChat);
     if (!this.messageText.trim()) return;
 
     this.messages.push({
-      from: 'You',
+      from: this.currentUserID,
       message: this.messageText,
     });
 
     const payload = {
-      'message': this.messageText,
-      'receiver': this.selectedChat
-    }
-    this._commonService.sendMessage(payload).subscribe(()=> {
-      console.log('Data Saved Succesfully')
-    })
+      message: this.messageText,
+      receiver: this.selectedChat,
+    };
+    this._commonService.sendMessage(payload).subscribe(() => {
+      console.log('Data Saved Succesfully');
+    });
     this.messageText = '';
   }
 
