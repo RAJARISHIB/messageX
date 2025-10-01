@@ -20,3 +20,7 @@ class UserViewSet(ModelViewSet, UserControllers):
     @action(detail=False, methods=['get'], url_path='check_auth', permission_classes=[IsAuthenticated])
     def check_auth(self, request):
         return Response({'message': 'Auth Successful'}, status=200)
+
+    @action(detail=False, methods=['get'], url_path='get-current-user-detail', permission_classes=[IsAuthenticated])
+    def get_current_user_details(self, request):
+        return self.get_current_user_details_db(request)
