@@ -55,6 +55,7 @@ export class ChatList implements OnInit, OnDestroy {
 
   selectChat(chat: any) {
     this.selectedChat = chat;
+    this.messages = []
     this.loadMessages(chat);
   }
 
