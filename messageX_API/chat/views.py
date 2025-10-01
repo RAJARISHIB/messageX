@@ -11,3 +11,8 @@ class ChatViewSet(ModelViewSet, ChatControllers):
     def filterUsers(self, request):
         ret = self.filter_users(request)
         return ret
+    
+    @action(detail=False, methods=['post'], url_path='sendMessage')
+    def sendMessage(self, request):
+        ret = self.dumpMessageDB(request)
+        return ret

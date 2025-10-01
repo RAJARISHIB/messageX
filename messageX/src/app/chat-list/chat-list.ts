@@ -67,14 +67,16 @@ export class ChatList implements OnInit, OnDestroy {
     if (!this.messageText.trim()) return;
 
     this.messages.push({
+      from: 'You',
       message: this.messageText,
     });
 
     const payload = {
-      'message': this.messageText
+      'message': this.messageText,
+      'receiver': this.selectedChat
     }
     this._commonService.sendMessage(payload).subscribe(()=> {
-      console.log('nigga subscribed')
+      console.log('Data Saved Succesfully')
     })
     this.messageText = '';
     // Optionally send message to server
