@@ -18,7 +18,6 @@ export class LoginPage {
   ) {}
 
   onSubmit(form: any){
-    console.log(this.activeTab, form?.value)
     if (form?.valid) {
       let payload = form?.value
       if (this.activeTab === "register" && form?.value?.password === form?.value?.confirmPassword ) {

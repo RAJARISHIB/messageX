@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Common {
+  audio = new Audio();
+  yippeAudio = 'assets/audio/yippe.mp3';
+
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -20,8 +23,11 @@ export class Common {
   doLogin(payload: any) {
     this.http.post(`${this.apiUrl}/user/do_login/`, payload).subscribe((response: any) => {
       if (response) {
-        sessionStorage.setItem('JWT_token', response?.access);
-        this.router.navigateByUrl('chat');
+        if (response?.access) {
+          this.playSound(this.yippeAudio);
+          sessionStorage.setItem('JWT_token', response?.access);
+          this.router.navigateByUrl('chat');
+        }
       }
     });
   }
@@ -49,6 +55,12 @@ export class Common {
   }
 
   getCurrentUserDetails() {
-    return this.http.get(`${this.apiUrl}/user/get-current-user-detail/`)
+    return this.http.get(`${this.apiUrl}/user/get-current-user-detail/`);
+  }
+
+  playSound(src: string = '') {
+    this.audio.src = src;
+    this.audio.load();
+    this.audio.play();
   }
 }
