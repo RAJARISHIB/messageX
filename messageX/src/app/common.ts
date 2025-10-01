@@ -40,6 +40,6 @@ export class Common {
   }
 
   sendMessage(payload: any) {
-    return this.http.get(`${this.apiUrl}/chat/sendMessage/`, payload)
+    return this.http.post(`${this.apiUrl}/chat/sendMessage/`, payload)
   }
 }
