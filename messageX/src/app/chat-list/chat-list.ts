@@ -55,11 +55,16 @@ export class ChatList implements OnInit, OnDestroy {
   }
 
   loadMessages(chat: any) {
-    // Replace this with an API call if needed
     this.messages = [
-      { from: chat.username, message: 'Hello!' },
+      { from: chat.id, message: 'Hello!' },
       { from: 'You', message: 'Hi there!' },
     ];
+    let payload = {
+      'receiver': this.selectedChat
+    }
+    this._commonService.getMessage(payload).subscribe((response) => {
+      console.log('response =======>', response)
+    })
   }
 
   sendMessage() {
@@ -79,8 +84,6 @@ export class ChatList implements OnInit, OnDestroy {
       console.log('Data Saved Succesfully')
     })
     this.messageText = '';
-    // Optionally send message to server
-    // this._commonService.sendMessage(this.selectedChat.id, this.messageText).subscribe(...)
   }
 
   callbutton() {

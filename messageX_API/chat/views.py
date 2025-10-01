@@ -16,3 +16,8 @@ class ChatViewSet(ModelViewSet, ChatControllers):
     def sendMessage(self, request):
         ret = self.dumpMessageDB(request)
         return ret
+    
+    @action(detail=False, methods=['post'], url_path='getMessage')
+    def getMessage(self, request):
+        ret = self.getMessageDB(request)
+        return ret
